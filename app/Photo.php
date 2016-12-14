@@ -7,5 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Photo extends Model
 {
     //
+    protected  $uploads =  '/images/';
     protected $fillable= ['file'];
+
+
+    // Accessors
+
+    public function  getFileAttribute($photo)
+    {
+        return $this->uploads.$photo;
+    }
 }
