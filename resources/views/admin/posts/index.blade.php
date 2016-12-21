@@ -12,8 +12,10 @@
                <th>Category</th>
                <th>Title</th>
                <th>Body</th>
-               <th>Created</th>
-               <th>Updated</th>
+               <th>Post Link</th>
+               <th>Comments</th>
+               <th>Created at</th>
+               <th>Updated at</th>
              </tr>
            </thead>
            <tbody>
@@ -26,6 +28,8 @@
                                 <td>{{$post->category ?$post->category->name : 'Uncategoriezed'}}</td>
                                 <td>{{$post->title}}</td>
                                 <td>{{str_limit($post->body,50)}}</td>
+                                 <td><a href="{{route('home.post', $post->slug)}}">View Post</a></td>
+                                 <td><a href="{{route('admin.comments.show', $post->id)}}">View Comments</a></td>
                                 <td>{{$post->created_at->diffForhumans()}}</td>
                                 <td>{{$post->updated_at->diffForhumans()}}</td>
 
@@ -36,6 +40,12 @@
 
           </tbody>
        </table>
+
+       <div class="row">
+           <div class="col-sm-6 col-sm-offset-5">
+               {{$posts->render()}}
+           </div>
+       </div>
 
 @stop
 

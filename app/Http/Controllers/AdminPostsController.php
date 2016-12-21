@@ -8,8 +8,10 @@ use App\Photo;
 use App\Post;
 use Illuminate\Http\Request;
 
+
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+
 
 class AdminPostsController extends Controller
 {
@@ -21,7 +23,8 @@ class AdminPostsController extends Controller
     public function index()
     {
         //
-        $posts = Post ::all();
+        //$posts = Post ::all();
+        $posts = Post ::paginate(2);
 
         return view ('admin.posts.index', compact('posts'));
     }
@@ -53,6 +56,7 @@ class AdminPostsController extends Controller
     {
         //Store information in the databse
         $input = $request->all();  // asssign the request to the input
+        //$title = str_slug($request->title, '-');
         $user = Auth::user();
         if($file = $request->file('photo_id')){
 
@@ -139,5 +143,18 @@ class AdminPostsController extends Controller
        /// Session::flash('deleted_post', 'The post has been deleted');
 
         //return "DESTROY";
+    }
+
+    public  function  post($slug)
+    {
+
+        //$post = Post::findOrFail($id);
+
+         $post = Post::findBySlugOrFail($slug);
+         $comments = $post->comments()->whereIsActive(1)->get();
+
+
+        return view('post', compact('post', 'comments'));
+
     }
 }
