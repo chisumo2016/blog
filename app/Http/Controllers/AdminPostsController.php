@@ -38,7 +38,7 @@ class AdminPostsController extends Controller
     {
         //
 
-        $categories = Category::lists('name', 'id')->all();
+        $categories = Category::pluck('name', 'id')->all();
 
         return view ('admin.posts.create', compact('categories'));
     }
@@ -67,7 +67,7 @@ class AdminPostsController extends Controller
           $input['photo_id'] = $photo->id;
         }
 
-        //return $request->all();
+        //return $request->all();     dd($user->posts);
         $user->posts()->create(  $input);
         return redirect('/admin/posts');
 

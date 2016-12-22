@@ -23,7 +23,7 @@
   <hr>
 
   <!-- Preview Image -->
-  <img class="img-responsive" src="{{$post->photo->file}}" alt="">
+  <img class="img-responsive" src="{{$post->photo ? $post->photo->file : 'http://placehold.it/400x400'}}" alt="">
 
   <hr>
 

@@ -12,6 +12,19 @@ class Post extends Model
     use SluggableScopeHelpers; // Here we import the trait
 
 
+
+    //Mass Assigment
+
+    protected  $fillable = [
+        'category_id',
+        'photo_id',
+        'title',
+        'body'
+
+
+    ];
+
+
     /**
      * Sluggable configuration.
      *
@@ -27,17 +40,6 @@ class Post extends Model
         ];
     }
 
-
-    //Mass Assigment
-
-    protected  $fillable = [
-        'category_id',
-        'photo_id',
-        'title',
-        'body'
-
-
-    ];
 
     protected $primaryKey = 'id';
 
